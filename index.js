@@ -5,7 +5,7 @@ const conectDB = require("./db/config.db");
 const Http = require("http").createServer(app);
 const io = require("socket.io")(Http, {
   cors: {
-    origin: "*",
+    origin: "https://chat-green-pi-54.vercel.app",
   },
 });
 require("dotenv").config();
@@ -24,7 +24,11 @@ const {
 } = require("./controllers/user.controller");
 const AvatarRouter = require("./routes/avatar.routes");
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://chat-green-pi-54.vercel.app",
+  })
+);
 app.use(express.json());
 app.use("/avatars", AvatarRouter);
 app.get("/users/:username", getUser);
